@@ -71,7 +71,6 @@ const closeModalBtnEL = document.querySelector(".lightbox__button");
 const lightBoxEl = document.querySelector(".lightbox__content");
 let count = 0;
 
-const srcCollection = infoOfGal.map((item) => item.original);
 const listOfItemGalleryMarkUp = infoOfGal
   .map(({ preview, original, description }) => {
     return createItemOfGalleryMarkUp({ preview, original, description });
