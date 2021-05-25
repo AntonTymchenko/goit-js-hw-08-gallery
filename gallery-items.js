@@ -123,5 +123,4 @@ function createItemOfGalleryMarkUp({ preview, original, description }) {
 function onCloseModalBtnELClick() {
   modalEl.classList.remove("is-open");
   modalEl.removeEventListener("click", onCloseModalBtnELClick);
-  lightBoxEl.firstElementChild.src = "";
 }
