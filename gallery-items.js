@@ -69,8 +69,10 @@ const modalEl = document.querySelector(".js-lightbox");
 const overlayBox = document.querySelector(".lightbox__overlay");
 const closeModalBtnEL = document.querySelector(".lightbox__button");
 const lightBoxEl = document.querySelector(".lightbox__content");
-let count = 0;
 
+let currentIndex;
+
+const arrayOriginal = infoOfGal.map((el) => el.original);
 const listOfItemGalleryMarkUp = infoOfGal
   .map(({ preview, original, description }) => {
     return createItemOfGalleryMarkUp({ preview, original, description });
@@ -87,20 +89,11 @@ overlayBox.addEventListener("click", () => {
   lightBoxEl.firstElementChild.src = " ";
 });
 
-function onWindowEvent(event) {
-  if (event.key === "Escape") {
-    onCloseModalBtnELClick();
-  }
-}
-
 function onWrapperOfGalleryElClick(event) {
   if (!event.target.classList.contains("gallery__image")) {
     return;
   }
-  modalEl.classList.add("is-open");
-  lightBoxEl.firstElementChild.src = event.target.dataset.source;
-  lightBoxEl.firstElementChild.alt = event.target.alt;
-  lightBoxEl.firstElementChild.dataset.count = event.target.dataset.count;
+  getStyleToLightBoxEl(event);
 }
 
 function createItemOfGalleryMarkUp({ preview, original, description }) {
@@ -112,7 +105,6 @@ function createItemOfGalleryMarkUp({ preview, original, description }) {
     <img
       class="gallery__image"
       src=${preview}
-      data-count=${count++}
       data-source=${original}
       alt=${description}
     />
@@ -123,4 +115,43 @@ function createItemOfGalleryMarkUp({ preview, original, description }) {
 function onCloseModalBtnELClick() {
   modalEl.classList.remove("is-open");
   modalEl.removeEventListener("click", onCloseModalBtnELClick);
+}
+
+function onWindowEvent(event) {
+  currentIndex = arrayOriginal.indexOf(lightBoxEl.firstElementChild.src);
+  if (event.key === "Escape") {
+    onCloseModalBtnELClick();
+  }
+  changeImgByArrowLeft(event);
+  changeImgByArrowRigth(event);
+}
+
+function changeImgByArrowRigth(event) {
+  if (event.key === "ArrowRight") {
+    ++currentIndex;
+    if (currentIndex < arrayOriginal.length) {
+      lightBoxEl.firstElementChild.src = arrayOriginal[currentIndex];
+    } else {
+      currentIndex -= arrayOriginal.length;
+      lightBoxEl.firstElementChild.src = arrayOriginal[currentIndex];
+    }
+  }
+}
+
+function changeImgByArrowLeft(event) {
+  if (event.key === "ArrowLeft") {
+    --currentIndex;
+    if (currentIndex < 0) {
+      currentIndex += arrayOriginal.length;
+      lightBoxEl.firstElementChild.src = arrayOriginal[currentIndex];
+    } else {
+      lightBoxEl.firstElementChild.src = arrayOriginal[currentIndex];
+    }
+  }
+}
+
+function getStyleToLightBoxEl(event) {
+  modalEl.classList.add("is-open");
+  lightBoxEl.firstElementChild.src = event.target.dataset.source;
+  lightBoxEl.firstElementChild.alt = event.target.alt;
 }
