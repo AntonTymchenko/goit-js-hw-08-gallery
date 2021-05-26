@@ -100,7 +100,7 @@ function createItemOfGalleryMarkUp({ preview, original, description }) {
   return `<li class="gallery__item">
   <a
     class="gallery__link"
-    href=#
+    href="https://cdn.pixabay.com/photo/2010/12/13/10/13/tulips-2546_1280.jpg"
   >
     <img
       class="gallery__image"
@@ -152,6 +152,7 @@ function changeImgByArrowLeft(event) {
 
 function getStyleToLightBoxEl(event) {
   modalEl.classList.add("is-open");
+  event.preventDefault();
   lightBoxEl.firstElementChild.src = event.target.dataset.source;
   lightBoxEl.firstElementChild.alt = event.target.alt;
 }
