@@ -72,7 +72,7 @@ const lightBoxEl = document.querySelector(".lightbox__content");
 
 let currentIndex;
 
-const arrayOriginal = infoOfGal.map((el) => el.original);
+const arrayOriginalImg = infoOfGal.map((el) => el.original);
 const listOfItemGalleryMarkUp = infoOfGal
   .map(({ preview, original, description }) => {
     return createItemOfGalleryMarkUp({ preview, original, description });
@@ -118,7 +118,7 @@ function onCloseModalBtnELClick() {
 }
 
 function onWindowEvent(event) {
-  currentIndex = arrayOriginal.indexOf(lightBoxEl.firstElementChild.src);
+  currentIndex = arrayOriginalImg.indexOf(lightBoxEl.firstElementChild.src);
   if (event.key === "Escape") {
     onCloseModalBtnELClick();
   }
@@ -129,11 +129,11 @@ function onWindowEvent(event) {
 function changeImgByArrowRigth(event) {
   if (event.key === "ArrowRight") {
     ++currentIndex;
-    if (currentIndex < arrayOriginal.length) {
-      lightBoxEl.firstElementChild.src = arrayOriginal[currentIndex];
+    if (currentIndex < arrayOriginalImg.length) {
+      lightBoxEl.firstElementChild.src = arrayOriginalImg[currentIndex];
     } else {
-      currentIndex -= arrayOriginal.length;
-      lightBoxEl.firstElementChild.src = arrayOriginal[currentIndex];
+      currentIndex -= arrayOriginalImg.length;
+      lightBoxEl.firstElementChild.src = arrayOriginalImg[currentIndex];
     }
   }
 }
@@ -142,10 +142,10 @@ function changeImgByArrowLeft(event) {
   if (event.key === "ArrowLeft") {
     --currentIndex;
     if (currentIndex < 0) {
-      currentIndex += arrayOriginal.length;
-      lightBoxEl.firstElementChild.src = arrayOriginal[currentIndex];
+      currentIndex += arrayOriginalImg.length;
+      lightBoxEl.firstElementChild.src = arrayOriginalImg[currentIndex];
     } else {
-      lightBoxEl.firstElementChild.src = arrayOriginal[currentIndex];
+      lightBoxEl.firstElementChild.src = arrayOriginalImg[currentIndex];
     }
   }
 }
