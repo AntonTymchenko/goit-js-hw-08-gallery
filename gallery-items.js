@@ -113,8 +113,7 @@ function createItemOfGalleryMarkUp({ preview, original, description }) {
 
 function onCloseModalBtnELClick() {
   modalEl.classList.remove("is-open");
-  lightBoxEl.firstChild.src = "";
-  modalEl.removeEventListener("click", onCloseModalBtnELClick);
+  lightBoxEl.firstElementChild.src = "";
 }
 
 function onWindowEvent(event) {
