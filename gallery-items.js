@@ -86,7 +86,6 @@ window.addEventListener("keydown", onWindowEvent);
 wrapperOfGalleryEl.addEventListener("click", onWrapperOfGalleryElClick);
 overlayBox.addEventListener("click", () => {
   onCloseModalBtnELClick();
-  lightBoxEl.firstElementChild.src = " ";
 });
 
 function onWrapperOfGalleryElClick(event) {
@@ -100,7 +99,7 @@ function createItemOfGalleryMarkUp({ preview, original, description }) {
   return `<li class="gallery__item">
   <a
     class="gallery__link"
-    href="https://cdn.pixabay.com/photo/2010/12/13/10/13/tulips-2546_1280.jpg"
+    href=${preview}
   >
     <img
       class="gallery__image"
@@ -114,6 +113,7 @@ function createItemOfGalleryMarkUp({ preview, original, description }) {
 
 function onCloseModalBtnELClick() {
   modalEl.classList.remove("is-open");
+  lightBoxEl.firstChild.src = "";
   modalEl.removeEventListener("click", onCloseModalBtnELClick);
 }
 
