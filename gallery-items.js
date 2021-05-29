@@ -82,13 +82,14 @@ const listOfItemGalleryMarkUp = infoOfGal
 wrapperOfGalleryEl.insertAdjacentHTML("beforeend", listOfItemGalleryMarkUp);
 
 closeModalBtnEL.addEventListener("click", onCloseModalBtnELClick);
-window.addEventListener("keydown", onWindowEvent);
+
 wrapperOfGalleryEl.addEventListener("click", onWrapperOfGalleryElClick);
 overlayBox.addEventListener("click", () => {
   onCloseModalBtnELClick();
 });
 
 function onWrapperOfGalleryElClick(event) {
+  window.addEventListener("keydown", onWindowEvent);
   if (!event.target.classList.contains("gallery__image")) {
     return;
   }
@@ -114,6 +115,7 @@ function createItemOfGalleryMarkUp({ preview, original, description }) {
 function onCloseModalBtnELClick() {
   modalEl.classList.remove("is-open");
   lightBoxEl.firstElementChild.src = "";
+  window.removeEventListener("keydown", onWindowEvent);
 }
 
 function onWindowEvent(event) {
